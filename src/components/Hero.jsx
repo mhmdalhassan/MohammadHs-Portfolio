@@ -3,6 +3,7 @@ import { Mail, ArrowRight, Download, MapPin } from "lucide-react";
 
 export default function Hero() {
   const { data } = usePortfolio();
+  console.log("PORTFOLIO DATA:", data);
 
   // 🔥 حماية من undefined (مهم جداً)
   const personal = data?.personal || {};
