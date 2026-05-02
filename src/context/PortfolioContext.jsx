@@ -9,16 +9,19 @@ export function PortfolioProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   // 🚀 REALTIME FIREBASE LISTENER
-  useEffect(() => {
-    const unsubscribe = subscribePortfolio((res) => {
-      if (res && typeof res === "object") {
-        setData(res); // 🔥 updates ALL devices instantly
-      }
-      setLoading(false);
-    });
+ useEffect(() => {
+   const unsubscribe = subscribePortfolio((res) => {
+     if (res && typeof res === "object") {
+       setData((prev) => ({
+         ...prev,
+         ...res,
+       }));
+     }
+     setLoading(false);
+   });
 
-    return () => unsubscribe(); // cleanup
-  }, []);
+   return () => unsubscribe();
+ }, []);
 
   // 🎯 Safe updater (used in Admin)
   const updateData = (newData) => {

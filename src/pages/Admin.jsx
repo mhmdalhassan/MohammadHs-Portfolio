@@ -74,14 +74,19 @@ export default function Admin() {
     setIsLoggedIn(false);
   };
 
-  const updatePersonal = (field, value) => {
-    setData({
+  const updatePersonal = async (field, value) => {
+    const newData = {
       ...data,
       personal: {
         ...data.personal,
         [field]: value,
       },
-    });
+    };
+
+    setData(newData);
+
+    // 🔥 sync all devices
+    await savePortfolio(newData);
   };
 
   const handleFileUpload = (field, file) => {
@@ -542,23 +547,42 @@ function Settings({ theme, updateTheme, getAuth, data, setData }) {
     localStorage.setItem("adminAuth", JSON.stringify(auth));
     alert("Updated!");
   };
-  const handleFaviconUpload = (file) => {
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const favicon = reader.result;
-      setData({ ...data, settings: { ...data.settings, favicon } });
-      let link =
-        document.getElementById("dynamic-favicon") ||
-        document.createElement("link");
-      link.id = "dynamic-favicon";
-      link.rel = "icon";
-      link.href = favicon;
-      if (!document.getElementById("dynamic-favicon"))
-        document.head.appendChild(link);
+const handleFaviconUpload = (file) => {
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = async () => {
+    const favicon = reader.result;
+
+    const newData = {
+      ...data,
+      settings: {
+        ...data.settings,
+        favicon,
+      },
     };
-    reader.readAsDataURL(file);
+
+    setData(newData);
+
+    // 🔥 save to firebase for all devices
+    await savePortfolio(newData);
+
+    let link =
+      document.getElementById("dynamic-favicon") ||
+      document.createElement("link");
+
+    link.id = "dynamic-favicon";
+    link.rel = "icon";
+    link.href = favicon;
+
+    if (!document.getElementById("dynamic-favicon")) {
+      document.head.appendChild(link);
+    }
   };
+
+  reader.readAsDataURL(file);
+};
 
   return (
     <div className="space-y-16">

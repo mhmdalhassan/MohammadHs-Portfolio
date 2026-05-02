@@ -5,14 +5,12 @@ const docRef = doc(db, "portfolio", "data");
 
 // realtime listener
 export const subscribePortfolio = (callback) => {
-  return onSnapshot(docRef, (docSnap) => {
-    if (docSnap.exists()) {
-      callback(docSnap.data());
-    }
+  return onSnapshot(docRef, (snap) => {
+    callback(snap.data());
   });
 };
 
-// save
+// save updates
 export const savePortfolio = async (data) => {
-  await setDoc(docRef, data);
+  await setDoc(docRef, data );
 };
