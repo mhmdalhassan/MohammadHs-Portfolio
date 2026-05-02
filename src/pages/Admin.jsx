@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { usePortfolio } from "../context/PortfolioContext";
 import { useTheme } from "../context/ThemeContext";
+import { savePortfolio } from "../api/portfolioApi";
 
 const TABS = [
   "Personal",
@@ -211,6 +212,20 @@ const exportJson = () => {
           </div>
 
           <div className="flex flex-wrap gap-3">
+            <button
+              onClick={async () => {
+                try {
+                  await savePortfolio(data);
+                  alert("Saved to Firebase successfully 🔥");
+                } catch (err) {
+                  console.error(err);
+                  alert("Save failed");
+                }
+              }}
+              className="px-5 py-2.5 bg-green-500 text-white rounded-xl font-bold hover:bg-green-400 transition-all"
+            >
+              Save Changes
+            </button>
             <button
               onClick={exportJson}
               className="px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 text-sm font-semibold transition-all"

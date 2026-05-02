@@ -47,7 +47,7 @@ export default function Hero() {
             <p className="font-mono text-primary-600 dark:text-primary-400 text-sm sm:text-base lg:text-lg mb-5 sm:mb-6 font-bold flex items-center justify-center lg:justify-start gap-2">
               <span className="opacity-50">&lt;</span>
               <span className="break-words text-center lg:text-left">
-                {personal.title}
+                {personal?.title || "Full Stack Developer"}
               </span>
               <span className="opacity-50">/&gt;</span>
             </p>
@@ -71,7 +71,7 @@ export default function Hero() {
               </a>
 
               <a
-                href={personal.cvUrl}
+                href={personal?.cvUrl || "/Mohammad_Al_Hassan_CV.pdf"}
                 download
                 className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition"
               >

@@ -24,7 +24,7 @@ export default function Certificates() {
             </h3>
 
             <div className="space-y-4">
-              {certificates.map((cert) => (
+              {(certificates || []).map((cert) => (
                 <div
                   key={cert.id}
                   className="flex gap-4 p-4 rounded-xl bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-white/5"
@@ -51,7 +51,7 @@ export default function Certificates() {
             </h3>
 
             <div className="space-y-6">
-              {spokenLanguages.map((item) => (
+              {(spokenLanguages || []).map((item) => (
                 <div key={item.language}>
                   <div className="flex justify-between mb-2">
                     <span className="font-semibold text-slate-900 dark:text-white">

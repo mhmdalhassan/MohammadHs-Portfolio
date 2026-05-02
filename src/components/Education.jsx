@@ -18,7 +18,7 @@ export default function Education() {
         />
 
         <div className="grid lg:grid-cols-3 gap-6">
-          {education.map((item) => (
+          {(education || []).map((item) => (
             <div
               key={item.id}
               className="p-6 rounded-2xl bg-white dark:bg-dark-900 border border-slate-200 dark:border-white/5 glow-border"
@@ -40,7 +40,7 @@ export default function Education() {
               </p>
 
               <ul className="mt-5 space-y-2">
-                {item.bullets.map((bullet) => (
+                {(item?.bullets || []).map((bullet) => (
                   <li
                     key={bullet}
                     className="flex gap-2 text-sm text-slate-700 dark:text-slate-300"

@@ -75,7 +75,7 @@ export default function About() {
               </h3>
 
               <div className="grid grid-cols-1 gap-3">
-                {softSkills.map((skill) => (
+                {(softSkills || []).map((skill) => (
                   <div
                     key={skill}
                     className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:bg-white/10 hover:translate-x-2 transition-all duration-300 group/skill"

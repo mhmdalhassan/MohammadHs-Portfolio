@@ -19,7 +19,7 @@ export default function Projects() {
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12">
-          {projects.map((project) => (
+          {(projects || []).map((project) => (
             <article
               key={project.id}
               className="group relative flex flex-col p-6 sm:p-7 rounded-[28px] sm:rounded-[32px]
@@ -59,7 +59,7 @@ export default function Projects() {
 
               {/* Tech */}
               <div className="flex flex-wrap gap-2 mb-8">
-                {(project.techStack || []).map((tech) => (
+                {(project?.techStack || []).map((tech) => (
                   <span
                     key={tech}
                     className="px-2.5 py-1 rounded-md text-[10px] font-bold bg-slate-200/50 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-transparent group-hover:border-slate-300 dark:group-hover:border-white/10 transition-all"

@@ -66,7 +66,7 @@ export default function Navbar() {
 
         {/* DESKTOP */}
         <ul className="hidden md:flex items-center gap-1 bg-slate-100/50 dark:bg-white/5 p-1 rounded-full">
-          {navLinks.map(({ label, href }) => (
+          {(navLinks || []).map(({ label, href }) => (
             <li key={href}>
               <a
                 href={href}
@@ -90,7 +90,7 @@ export default function Navbar() {
           </button>
 
           <a
-            href={personal.cvUrl}
+            href={personal?.cvUrl || "/Mohammad_Al_Hassan_CV.pdf"}
             download
             className="hidden sm:flex px-4 py-2 bg-primary-500 text-white rounded-xl"
           >
@@ -140,7 +140,7 @@ export default function Navbar() {
           }`}
         >
           <ul className="space-y-4 mt-10">
-            {navLinks.map(({ label, href }) => (
+            {(navLinks || []).map(({ label, href }) => (
               <li key={href}>
                 <a
                   href={href}
@@ -154,7 +154,7 @@ export default function Navbar() {
           </ul>
 
           <a
-            href={personal.cvUrl}
+            href={personal?.cvUrl || "/Mohammad_Al_Hassan_CV.pdf"}
             download
             className="block mt-10 text-center bg-primary-500 text-white py-3 rounded-xl font-bold"
           >

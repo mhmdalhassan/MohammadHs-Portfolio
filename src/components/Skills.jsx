@@ -32,7 +32,7 @@ export default function Skills() {
         />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {skills.map((group, index) => (
+          {(skills || []).map((group, index) => (
             <div
               key={group.category}
               className="group relative p-8 rounded-[32px] bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/5 hover:border-primary-500/50 dark:hover:border-primary-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/5"
@@ -52,7 +52,7 @@ export default function Skills() {
 
               {/* Skill Tags */}
               <div className="flex flex-wrap gap-2">
-                {group.items.map((item) => (
+                {(group?.items || []).map((item) => (
                   <span
                     key={item}
                     className="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 border border-transparent group-hover:border-primary-500/20 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"

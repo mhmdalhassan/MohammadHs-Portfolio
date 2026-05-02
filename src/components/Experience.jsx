@@ -18,7 +18,7 @@ export default function Experience() {
         />
 
         <div className="space-y-6">
-          {experience.map((item) => (
+          {(experience || []).map((item) => (
             <div
               key={item.id}
               className="p-6 rounded-2xl bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-white/5"
@@ -39,7 +39,7 @@ export default function Experience() {
               </div>
 
               <ul className="space-y-3">
-                {item.bullets.map((bullet) => (
+                {(item?.bullets || []).map((bullet) => (
                   <li
                     key={bullet}
                     className="flex gap-3 text-slate-700 dark:text-slate-300"
