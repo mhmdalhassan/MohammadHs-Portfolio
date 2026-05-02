@@ -267,6 +267,12 @@ const exportJson = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
           <aside className="space-y-2 bg-[#111113] p-4 rounded-3xl border border-white/10 h-fit sticky top-4 z-50 shadow-2xl">
+            <div className="mb-6 px-4 py-3 rounded-2xl bg-white/5 border border-white/10">
+              <h2 className="text-lg font-black text-white leading-tight">
+                Mohammad Al Hassan
+              </h2>
+              <p className="text-xs text-slate-500 mt-1">Admin Panel</p>
+            </div>
             <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-4 ml-4">
               Navigation
             </p>
