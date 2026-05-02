@@ -3,7 +3,9 @@ import { Mail, ArrowRight, Download, MapPin } from "lucide-react";
 
 export default function Hero() {
   const { data } = usePortfolio();
-  const { personal } = data;
+
+  // 🔥 حماية من undefined (مهم جداً)
+  const personal = data?.personal || {};
 
   return (
     <section
@@ -13,11 +15,8 @@ export default function Hero() {
       <div className="absolute inset-0 grid-bg opacity-[0.15] dark:opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-dark-900/50 dark:to-dark-900" />
 
-      <div className="absolute top-1/4 -left-24 sm:-left-20 w-64 h-64 sm:w-[500px] sm:h-[500px] rounded-full bg-primary-500/20 blur-[80px] sm:blur-[120px] pointer-events-none animate-pulse-slow" />
-      <div className="absolute bottom-1/4 -right-24 sm:-right-20 w-64 h-64 sm:w-[400px] sm:h-[400px] rounded-full bg-blue-500/10 blur-[70px] sm:blur-[100px] pointer-events-none animate-pulse-slow delay-700" />
-
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20 w-full">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 sm:gap-10 lg:gap-16">
           {/* LEFT */}
           <div className="flex-1 text-center lg:text-left z-10 w-full">
             {/* Badge */}
@@ -32,19 +31,19 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Title (fixed overflow issue) */}
-            <h1 className="font-display font-black text-[clamp(2.2rem,9vw,4.8rem)] lg:text-[clamp(3.5rem,5vw,5.8rem)] text-slate-900 dark:text-white leading-[0.95] mb-5 sm:mb-6 tracking-normal sm:tracking-tight">
-              <span className="block leading-[0.9] whitespace-nowrap">
+            {/* Title (FIX RESPONSIVE) */}
+            <h1 className="font-display font-black text-[clamp(2rem,8vw,5rem)] sm:text-[clamp(2.5rem,7vw,5rem)] text-slate-900 dark:text-white leading-[0.95] mb-5 sm:mb-6">
+              <span className="block break-normal sm:whitespace-nowrap">
                 Mohammad
               </span>
 
-              <span className="block leading-[0.9] whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-blue-500 dark:from-primary-400 dark:to-blue-400">
+              <span className="block break-normal sm:whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-blue-500 dark:from-primary-400 dark:to-blue-400">
                 Al Hassan
               </span>
             </h1>
 
             {/* Role */}
-            <p className="font-mono text-primary-600 dark:text-primary-400 text-sm sm:text-base lg:text-lg mb-5 sm:mb-6 font-bold flex items-center justify-center lg:justify-start gap-2">
+            <p className="font-mono text-primary-600 dark:text-primary-400 text-sm sm:text-base lg:text-lg mb-5 sm:mb-6 font-bold flex items-center justify-center lg:justify-start gap-2 flex-wrap">
               <span className="opacity-50">&lt;</span>
               <span className="break-words text-center lg:text-left">
                 {personal?.title || "Full Stack Developer"}
@@ -53,27 +52,24 @@ export default function Hero() {
             </p>
 
             {/* Summary */}
-            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed mb-8 sm:mb-10 mx-auto lg:mx-0">
-              {personal.summary}
+            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed mb-8 sm:mb-10 mx-auto lg:mx-0 px-2 sm:px-0">
+              {personal?.summary || ""}
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-2 sm:px-0">
               <a
                 href="#projects"
-                className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-slate-900 dark:bg-primary-500 text-white font-bold transition hover:scale-[1.02]"
+                className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-slate-900 dark:bg-primary-500 text-white font-bold transition hover:scale-[1.02] w-full sm:w-auto"
               >
                 Explore Projects
-                <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
+                <ArrowRight size={18} />
               </a>
 
               <a
                 href={personal?.cvUrl || "/Mohammad_Al_Hassan_CV.pdf"}
                 download
-                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition"
+                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition w-full sm:w-auto"
               >
                 <Download size={18} />
                 Get Resume
@@ -81,16 +77,19 @@ export default function Hero() {
             </div>
 
             {/* Socials */}
-            <div className="flex items-center justify-center lg:justify-start gap-5 mt-8 sm:mt-12">
-              <SocialLink href={personal.github} label="GitHub">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 mt-8 sm:mt-12">
+              <SocialLink href={personal?.github} label="GitHub">
                 <GitHubIcon />
               </SocialLink>
 
-              <SocialLink href={personal.linkedin} label="LinkedIn">
+              <SocialLink href={personal?.linkedin} label="LinkedIn">
                 <LinkedInIcon />
               </SocialLink>
 
-              <SocialLink href={`mailto:${personal.email}`} label="Email">
+              <SocialLink
+                href={personal?.email ? `mailto:${personal.email}` : ""}
+                label="Email"
+              >
                 <Mail size={20} />
               </SocialLink>
             </div>
@@ -98,28 +97,29 @@ export default function Hero() {
 
           {/* RIGHT */}
           <div className="flex-shrink-0 relative w-full flex justify-center lg:w-auto">
-            <div className="relative group w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
-              <div className="absolute -inset-3 sm:-inset-4 rounded-[32px] bg-gradient-to-tr from-primary-500 to-blue-400 opacity-20 blur-2xl group-hover:opacity-40 transition" />
+            <div className="relative group w-40 h-40 sm:w-60 sm:h-60 lg:w-80 lg:h-80">
+              <div className="absolute -inset-2 sm:-inset-3 rounded-[28px] bg-gradient-to-tr from-primary-500 to-blue-400 opacity-20 blur-2xl" />
 
-              <div className="relative w-full h-full rounded-[28px] overflow-hidden border border-white/10 shadow-2xl">
-                {personal.avatar ? (
+              <div className="relative w-full h-full rounded-[24px] overflow-hidden border border-white/10 shadow-2xl">
+                {personal?.avatar ? (
                   <img
                     src={personal.avatar}
-                    alt={personal.name}
+                    alt={personal?.name}
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-dark-800 text-white text-5xl font-black">
-                    {personal.avatarInitials || "MH"}
+                  <div className="w-full h-full flex items-center justify-center bg-dark-800 text-white text-3xl sm:text-4xl font-black">
+                    {personal?.avatarInitials || "MH"}
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="absolute -bottom-4 bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg">
+            {/* LOCATION */}
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 px-3 py-2 rounded-xl flex items-center gap-2 shadow-lg whitespace-nowrap">
               <MapPin size={14} className="text-primary-500" />
-              <span className="text-xs font-bold uppercase whitespace-nowrap">
-                {personal.location}
+              <span className="text-[10px] sm:text-xs font-bold uppercase">
+                {personal?.location || ""}
               </span>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function Hero() {
   );
 }
 
-/* SOCIAL */
+/* ✅ FIXED SocialLink */
 function SocialLink({ href, children, label }) {
   if (!href) return null;
 

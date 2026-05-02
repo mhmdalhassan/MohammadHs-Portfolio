@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { defaultPortfolioData } from "../utils/storage";
-import { loadPortfolio } from "../api/portfolioApi";
+import { subscribePortfolio } from "../api/portfolioApi";
 
 const PortfolioContext = createContext();
 
@@ -8,29 +8,19 @@ export function PortfolioProvider({ children }) {
   const [data, setData] = useState(defaultPortfolioData);
   const [loading, setLoading] = useState(true);
 
-  // 🚀 Load from Firebase on start
+  // 🚀 REALTIME FIREBASE LISTENER
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await loadPortfolio();
-
-        if (res && typeof res === "object") {
-          setData((prev) => ({
-            ...prev,
-            ...res,
-          }));
-        }
-      } catch (err) {
-        console.error("Firebase load error:", err);
-      } finally {
-        setLoading(false);
+    const unsubscribe = subscribePortfolio((res) => {
+      if (res && typeof res === "object") {
+        setData(res); // 🔥 updates ALL devices instantly
       }
-    };
+      setLoading(false);
+    });
 
-    fetchData();
+    return () => unsubscribe(); // cleanup
   }, []);
 
-  // 🎯 Safe updater (IMPORTANT)
+  // 🎯 Safe updater (used in Admin)
   const updateData = (newData) => {
     setData((prev) => ({
       ...prev,
@@ -55,7 +45,6 @@ export function PortfolioProvider({ children }) {
     link.href = favicon;
   }, [data]);
 
-  // 🔄 Reset
   function resetData() {
     setData(defaultPortfolioData);
   }

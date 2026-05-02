@@ -269,7 +269,7 @@ section {
   }
 
   h1 {
-    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    font-size: clamp(2rem, 9vw, 3rem) !important;
     line-height: 1 !important;
   }
 

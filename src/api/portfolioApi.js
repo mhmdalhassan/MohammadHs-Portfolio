@@ -1,18 +1,18 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
-const DOC_REF = doc(db, "portfolio", "main");
+const docRef = doc(db, "portfolio", "data");
 
-
-export const loadPortfolio = async () => {
-  const snap = await getDoc(DOC_REF);
-  if (snap.exists()) {
-    return snap.data();
-  }
-  return null;
+// realtime listener
+export const subscribePortfolio = (callback) => {
+  return onSnapshot(docRef, (docSnap) => {
+    if (docSnap.exists()) {
+      callback(docSnap.data());
+    }
+  });
 };
 
-
+// save
 export const savePortfolio = async (data) => {
-  await setDoc(DOC_REF, data, { merge: true });
+  await setDoc(docRef, data);
 };
