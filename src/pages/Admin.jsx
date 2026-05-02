@@ -98,19 +98,20 @@ export default function Admin() {
     reader.onload = () => updatePersonal(field, reader.result);
     reader.readAsDataURL(file);
   };
+const exportJson = () => {
+  const dataStr = JSON.stringify(data, null, 2);
 
-  const exportJson = () => {
-    const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    const safeDate = new Date().toISOString().slice(0, 10);
-    a.href = url;
-    a.download = `portfolio-backup-${safeDate}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+  const a = document.createElement("a");
+  const safeDate = new Date().toISOString().slice(0, 10);
+
+  a.setAttribute(
+    "href",
+    "data:application/json;charset=utf-8," + encodeURIComponent(dataStr),
+  );
+
+  a.setAttribute("download", `portfolio-backup-${safeDate}.json`);
+  a.click();
+};
 
   const importJson = (e) => {
     const file = e.target.files[0];
