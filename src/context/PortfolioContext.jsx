@@ -8,22 +8,23 @@ export function PortfolioProvider({ children }) {
   const [data, setData] = useState(defaultPortfolioData);
   const [loading, setLoading] = useState(true);
 
-  // 🚀 REALTIME FIREBASE LISTENER
- useEffect(() => {
-   const unsubscribe = subscribePortfolio((res) => {
-     if (res && typeof res === "object") {
-       setData((prev) => ({
-         ...prev,
-         ...res,
-       }));
-     }
-     setLoading(false);
-   });
+  // 🔥 realtime firebase sync
+  useEffect(() => {
+    const unsubscribe = subscribePortfolio((res) => {
+      if (res) {
+        setData((prev) => ({
+          ...prev,
+          ...res,
+        }));
+      }
 
-   return () => unsubscribe();
- }, []);
+      setLoading(false);
+    });
 
-  // 🎯 Safe updater (used in Admin)
+    return () => unsubscribe();
+  }, []);
+
+  // local updater
   const updateData = (newData) => {
     setData((prev) => ({
       ...prev,
@@ -31,9 +32,10 @@ export function PortfolioProvider({ children }) {
     }));
   };
 
-  // 🎯 Favicon handler
+  // favicon sync
   useEffect(() => {
     const favicon = data?.settings?.favicon;
+
     if (!favicon) return;
 
     let link = document.getElementById("dynamic-favicon");
