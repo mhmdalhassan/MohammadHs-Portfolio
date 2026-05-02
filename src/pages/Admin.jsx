@@ -199,8 +199,8 @@ const exportJson = () => {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-slate-200">
-      <div className="max-w-[1600px] mx-auto p-4 md:p-8">
+    <main className="min-h-screen bg-[#0a0a0c] text-slate-200 overflow-x-hidden">
+      <div className="max-w-[1600px] mx-auto p-4 md:p-8 relative">
         <header className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-12 bg-dark-800/50 p-8 rounded-3xl border border-white/5 backdrop-blur-md">
           <div>
             <span className="text-primary-500 font-bold text-xs uppercase tracking-[0.2em]">
@@ -266,7 +266,7 @@ const exportJson = () => {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
-          <aside className="space-y-2 bg-dark-800/95 backdrop-blur-xl p-4 rounded-3xl border border-white/10 h-fit sticky top-4 z-50">
+          <aside className="space-y-2 bg-[#111113] p-4 rounded-3xl border border-white/10 h-fit sticky top-4 z-50 shadow-2xl">
             <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-4 ml-4">
               Navigation
             </p>
