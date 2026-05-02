@@ -266,7 +266,7 @@ const exportJson = () => {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
-          <aside className="space-y-2 bg-dark-800/30 p-4 rounded-3xl border border-white/5 h-fit sticky top-8">
+          <aside className="space-y-2 bg-dark-800/95 backdrop-blur-xl p-4 rounded-3xl border border-white/10 h-fit sticky top-4 z-50">
             <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-4 ml-4">
               Navigation
             </p>
