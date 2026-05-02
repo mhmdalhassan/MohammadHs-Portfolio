@@ -8,12 +8,12 @@ import { PortfolioProvider } from "./context/PortfolioContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/MohammadHs-Portfolio/">
       <ThemeProvider>
         <PortfolioProvider>
           <App />
         </PortfolioProvider>
       </ThemeProvider>
     </BrowserRouter>
-  </StrictMode>
-);  
+  </StrictMode>,
+);
