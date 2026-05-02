@@ -10,7 +10,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "preview": "vite preview"
-    
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
