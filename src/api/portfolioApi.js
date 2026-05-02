@@ -12,5 +12,5 @@ export const subscribePortfolio = (callback) => {
 
 // save updates
 export const savePortfolio = async (data) => {
-  await setDoc(docRef, data );
+  await setDoc(docRef, data, { merge: true });
 };
