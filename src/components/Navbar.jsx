@@ -60,9 +60,9 @@ export default function Navbar() {
     >
       <nav className="max-w-6xl mx-auto px-4 flex items-center justify-between">
         {/* LOGO */}
-        {/* <a href="#" className="font-bold text-2xl">
+        <a href="#" className="font-bold text-2xl">
           <span className="gradient-text">Mohammad Al Hassan</span>.
-        </a> */}
+        </a>
 
         {/* DESKTOP */}
         <ul className="hidden md:flex items-center gap-1 bg-slate-100/50 dark:bg-white/5 p-1 rounded-full">
